@@ -13,6 +13,8 @@ Install this plugin in the same environment as Datasette.
 ```bash
 datasette install datasette-create-view
 ```
+This plugin requires [Datasette 1.0a12](https://docs.datasette.io/en/latest/changelog.html#a12-2024-02-29) or later.
+
 ## Usage
 
 Users with the `create-table` permission will get a new menu item on the query results page offering to save the query as a view.
