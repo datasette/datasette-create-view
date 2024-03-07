@@ -1,0 +1,33 @@
+[project]
+name = "datasette-create-view"
+version = "0.1"
+description = "Create a SQL view from a query"
+readme = "README.md"
+authors = [{name = "Simon Willison"}]
+license = {text = "Apache-2.0"}
+classifiers=[
+    "Framework :: Datasette",
+    "License :: OSI Approved :: Apache Software License"
+]
+requires-python = ">=3.8"
+dependencies = [
+    "datasette>=1.0a12"
+]
+
+[project.urls]
+Homepage = "https://github.com/datasette/datasette-create-view"
+Changelog = "https://github.com/datasette/datasette-create-view/releases"
+Issues = "https://github.com/datasette/datasette-create-view/issues"
+CI = "https://github.com/datasette/datasette-create-view/actions"
+
+[project.entry-points.datasette]
+create_view = "datasette_create_view"
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-asyncio"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "strict"
+
+[tool.setuptools.package-data]
+datasette_extract = ["templates/*"]

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Create view in {{ database }}{% endblock %}
+
+{% block extra_head %}
+<style>
+textarea#id_sql {
+  width: 80%;
+  height: 10em;
+}
+input#id_name {
+  width: 20em;
+  margin-left: 1em;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Create view in {{ database }}</h1>
+
+<form action="{{ request.path }}" method="POST">
+  <p>
+    <label>View name <input type="text" name="name" id="id_name"></label>
+  </p>
+  <p>
+    <label for="id_sql">SQL query</label>
+  </p>
+  <p><textarea id="id_sql" name="sql">{{ sql }}</textarea></p>
+  <p>
+    <input type="hidden" name="csrftoken" value="{{ csrftoken() }}">
+    <input type="submit" value="Create view">
+  </p>
+</form>
+
+{% endblock %}
