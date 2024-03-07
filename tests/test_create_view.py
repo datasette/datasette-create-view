@@ -61,6 +61,7 @@ async def test_create_view_errors(actor, args, expected_error):
     get_response = await datasette.client.get(
         "/test/-/create-view", params=args, cookies=cookies
     )
+    assert get_response.status_code == 200
     csrftoken = get_response.cookies["ds_csrftoken"]
     cookies["ds_csrftoken"] = csrftoken
     # Now do the POST

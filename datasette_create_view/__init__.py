@@ -88,6 +88,7 @@ async def create_view(request, datasette):
             "create_view.html",
             {
                 "sql": request.args.get("sql") or "",
+                "name": request.args.get("name") or "",
                 "database": db.name,
             },
             request=request,
