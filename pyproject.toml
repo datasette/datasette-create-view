@@ -1,6 +1,6 @@
 [project]
 name = "datasette-create-view"
-version = "0.1"
+version = "0.1a1"
 description = "Create a SQL view from a query"
 readme = "README.md"
 authors = [{name = "Simon Willison"}]
@@ -11,7 +11,7 @@ classifiers=[
 ]
 requires-python = ">=3.8"
 dependencies = [
-    "datasette>=1.0a12"
+    "datasette==1.0a19"
 ]
 
 [project.urls]
