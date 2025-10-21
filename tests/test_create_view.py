@@ -18,14 +18,16 @@ async def test_query_action_menu(actor, sql, should_see_option):
     cookies = {}
     if actor:
         cookies = {"ds_actor": datasette.client.actor_cookie({"id": actor})}
-    response = await datasette.client.get("/test", params={"sql": sql}, cookies=cookies)
-    fragment = (
-        '<a href="/test/-/create-view?sql=select+1">Create SQL view for this query</a>'
+    response = await datasette.client.get(
+        "/test", params={"sql": sql}, cookies=cookies, follow_redirects=True
     )
+    link = "/test/-/create-view?sql=select+1"
+    label = "Create SQL view for this query"
     if should_see_option:
-        assert fragment in response.text
+        assert link in response.text
+        assert label in response.text
     else:
-        assert fragment not in response.text
+        assert link not in response.text
 
 
 @pytest.mark.asyncio
