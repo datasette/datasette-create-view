@@ -14,6 +14,7 @@ import pytest
 )
 async def test_query_action_menu(actor, sql, should_see_option):
     datasette = Datasette()
+    datasette.root_enabled = True
     db = datasette.add_memory_database("test")
     cookies = {}
     if actor:
@@ -56,6 +57,7 @@ async def test_query_action_menu(actor, sql, should_see_option):
 async def test_create_view_errors(actor, args, expected_error):
     # Get csfrtoken
     datasette = Datasette()
+    datasette.root_enabled = True
     db = datasette.add_memory_database("test")
     cookies = {}
     if actor:
@@ -79,6 +81,7 @@ async def test_create_view_errors(actor, args, expected_error):
 @pytest.mark.asyncio
 async def test_happy_path():
     datasette = Datasette()
+    datasette.root_enabled = True
     db = datasette.add_memory_database("test")
     cookies = {"ds_actor": datasette.client.actor_cookie({"id": "root"})}
     get_response = await datasette.client.get("/test/-/create-view", cookies=cookies)

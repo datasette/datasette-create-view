@@ -1,4 +1,5 @@
 from datasette import hookimpl, Response
+from datasette.resources import DatabaseResource
 from datasette.utils import derive_named_parameters
 import urllib
 
@@ -14,8 +15,11 @@ def query_actions(datasette, database, actor, query_name, sql):
         if parameters:
             return
         # User must have create-table permission
-        if not await datasette.permission_allowed(
-            actor, "create-table", resource=database
+        database_resource = DatabaseResource(database)
+        if not await datasette.allowed(
+            actor=actor,
+            action="create-table",
+            resource=database_resource,
         ):
             return
         return [
@@ -38,6 +42,7 @@ def query_actions(datasette, database, actor, query_name, sql):
 async def create_view(request, datasette):
     database = request.url_vars["database"]
     db = datasette.get_database(database)
+    database_resource = DatabaseResource(database)
     if request.method == "POST":
         post_vars = await request.post_vars()
         sql = (post_vars.get("sql") or "").strip()
@@ -52,8 +57,10 @@ async def create_view(request, datasette):
                 }
             )
         )
-        if not await datasette.permission_allowed(
-            request.actor, "create-table", resource=database
+        if not await datasette.allowed(
+            actor=request.actor,
+            action="create-table",
+            resource=database_resource,
         ):
             datasette.add_message(
                 request,
