@@ -1,6 +1,6 @@
 [project]
 name = "datasette-create-view"
-version = "0.1a1"
+version = "0.1a2"
 description = "Create a SQL view from a query"
 readme = "README.md"
 authors = [{name = "Simon Willison"}]
